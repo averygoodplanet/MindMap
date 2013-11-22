@@ -29,6 +29,7 @@ function initializeEventHandlers(){
   $('#blackFilledRectangle').on('click', clickBlackFilledRectangle);
   $('#resetCanvas').on('click', clickResetCanvas);
   $('#redEmptyRectangle').on('click', clickRedEmptyRectangle);
+  $('#verticalLines').on('click', clickVerticalLines);
 }
 
 ///////////////////   Event Handlers  ///////////////////////////////////
@@ -88,6 +89,25 @@ function clickRedEmptyRectangle() {
   context.strokeRect(0, 0, 100, 100);
 }
 
+function clickVerticalLines() {
+  var canvas = document.getElementById('canvas');
+  var context = canvas.getContext('2d');
+  // use beginPath() for new path (e.g. a path that is a different color)
+  // let's canvas know this is a separate path.
+  context.beginPath();
+  for(var x = 0.5; x < 500; x += 10){
+    //moveTo (0.5, 0), (10.5, 0) ...
+    // use 0.5 to keep 1px width
+    context.moveTo(x, 0);
+    //lineTo (x, HEIGHT);
+    context.lineTo(x, 600);
+    //should 'pencil-trace' lines:
+    // (0.5, 0) to (0.5, 600), (10.5, 0) to (10.5, 600), ...
+  }
+  context.strokeStyle = 'green';
+  // 'ink in' the path that was created in 'pencil-trace'
+  context.stroke();
+}
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
 function submitAjaxForm(event, form, fn) {
