@@ -26,6 +26,9 @@ function socketConnected(data){
 
 function initializeEventHandlers(){
   $('#devEdit').on('click', clickDevEdit);
+  $('#blackFilledRectangle').on('click', clickBlackFilledRectangle);
+  $('#resetCanvas').on('click', clickResetCanvas);
+  $('#redEmptyRectangle').on('click', clickRedEmptyRectangle);
 }
 
 ///////////////////   Event Handlers  ///////////////////////////////////
@@ -33,13 +36,25 @@ function clickDevEdit(e){
   sendGenericAjaxRequest('/map', {}, 'GET', null, e, drawMap);
 }
 
-
-///////////////////////  Display Changes //////////////////////////////////
+///////////////////////  HTML/CSS Changes //////////////////////////////////
 function drawMap(AJAXdata){
   alert('in drawMap() function');
   console.log(dummyMapObject);
 }
 
+////////////////////////  <canvas> functions //////////////////////////////
+function clickBlackFilledRectangle() {
+  // console.log('in clickBlackFilledRectangle()');
+
+}
+
+function clickResetCanvas() {
+  // console.log('in clickResetCanvas()');
+}
+
+function clickRedEmptyRectangle() {
+  // console.log('in clickRedEmptyRectangle()');
+}
 
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
