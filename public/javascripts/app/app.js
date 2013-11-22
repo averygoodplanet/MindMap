@@ -134,6 +134,15 @@ function clickDrawText(canvas, context) {
 
 function clickDrawImageObject(canvas, context) {
   // make new Image object
+  var head = new Image();
+  //provide image source
+  head.src = "../../images/head.jpg";
+  //draw image using .onload
+  // at point (x, y) = (200, 200)
+  // scaled to 50 x 50
+  head.onload = function(){
+    context.drawImage(head, 200, 200, 50, 50);
+  };
 }
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
