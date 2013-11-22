@@ -33,13 +33,24 @@ function initializeEventHandlers(){
 
 ///////////////////   Event Handlers  ///////////////////////////////////
 function clickDevEdit(e){
-  sendGenericAjaxRequest('/map', {}, 'GET', null, e, drawMap);
+
+  //OPTION 1 (without AJAX, do window.location.href = '/map')
+  window.location.href = '/map';
+  ////////////////////////////////////
+
+  //OPTION 2 (with AJAX; and in callback success function replace the
+  // <body> with the <body> portion html returned from server)
+  //sendGenericAjaxRequest('/map', {}, 'GET', null, e, drawMap);
+  ////////////////////////////////////
 }
 
 ///////////////////////  HTML/CSS Changes //////////////////////////////////
 function drawMap(AJAXdata){
-  alert('in drawMap() function');
-  console.log(dummyMapObject);
+  ///////////// Option 2 (do not use)/////
+  // console.dir(AJAXdata);
+  // get body out of AJAXdata;
+  // $('body').replaceWith(AJAXdataBody);
+  /////////////// END Option 2///////////
 }
 
 ////////////////////////  <canvas> functions //////////////////////////////
