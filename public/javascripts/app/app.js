@@ -26,17 +26,33 @@ function socketConnected(data){
 
 function initializeEventHandlers(){
   $('#devEdit').on('click', clickDevEdit);
-  $('#blackFilledRectangle').on('click', clickBlackFilledRectangle);
-  $('#resetCanvas').on('click', clickResetCanvas);
-  $('#redEmptyRectangle').on('click', clickRedEmptyRectangle);
-  $('#verticalLines').on('click', clickVerticalLines);
-  $('#drawText').on('click', clickDrawText);
-  $('#drawImageObject').on('click', clickDrawImageObject);
+
+  // example of passing a function to a function
+  // this calls getCanvasThenNext which assigns canvas and context variables
+  // then calls appropriate function (passing canvas and context) to handle the user's action.
+  // using the getCanvasThenNext avoids having to assign canvas and context
+  // separately within each of the different canvas functions
+  $('#blackFilledRectangle').on('click', function() {
+    getCanvasThenNext(clickBlackFilledRectangle);});
+
+  $('#resetCanvas').on('click', function() {
+    getCanvasThenNext(clickResetCanvas);});
+
+  $('#redEmptyRectangle').on('click', function() {
+    getCanvasThenNext(clickRedEmptyRectangle);});
+
+  $('#verticalLines').on('click', function() {
+    getCanvasThenNext(clickVerticalLines);});
+
+  $('#drawText').on('click', function() {
+    getCanvasThenNext(clickDrawText);});
+
+  $('#drawImageObject').on('click', function() {
+    getCanvasThenNext(clickDrawImageObject);});
 }
 
 ///////////////////   Event Handlers  ///////////////////////////////////
 function clickDevEdit(e){
-
   //OPTION 1 (without AJAX, do window.location.href = '/map')
   window.location.href = '/map';
   ////////////////////////////////////
@@ -67,7 +83,7 @@ function getCanvasThenNext(next){
   next(canvas, context);
 }
 
-function clickBlackFilledRectangle() {
+function clickBlackFilledRectangle(canvas, context) {
   var canvas = document.getElementById('canvas');
   var context = canvas.getContext('2d');
   // draw a black rectangle using context.fillRect(x, y, w, h)
@@ -77,25 +93,20 @@ function clickBlackFilledRectangle() {
   context.fillRect(0, 0, 100, 100);
 }
 
-function clickResetCanvas() {
-  var canvas = document.getElementById('canvas');
-  // setting the height or width of <canvas> resets it
+function clickResetCanvas(canvas, context) {
+  // setting the height or width of <canvas> resets (erases) it
   canvas.width = canvas.width;
 }
 
-function clickRedEmptyRectangle() {
-  var canvas = document.getElementById('canvas');
-  var context = canvas.getContext('2d');
+function clickRedEmptyRectangle(canvas, context) {
   // change fillStyle to red
   context.strokeStyle = 'red';
   context.strokeRect(0, 0, 100, 100);
 }
 
-function clickVerticalLines() {
-  var canvas = document.getElementById('canvas');
-  var context = canvas.getContext('2d');
+function clickVerticalLines(canvas, context) {
   // use beginPath() for new path (e.g. a path that is a different color)
-  // let's canvas know this is a separate path.
+  // lets canvas know this is a separate path.
   context.beginPath();
   for(var x = 0.5; x < 600; x += 10){
     //moveTo (0.5, 0), (10.5, 0) ...
@@ -111,9 +122,7 @@ function clickVerticalLines() {
   context.stroke();
 }
 
-function clickDrawText() {
-  var canvas = document.getElementById('canvas');
-  var context = canvas.getContext('2d');
+function clickDrawText(canvas, context) {
   context.font = "bold 12px sans-serif";
   //drawing text normally:
   context.fillText('Sample TextI', 120, 120);
@@ -123,8 +132,8 @@ function clickDrawText() {
   context.fillText("2nd Sample", 590, 590);
 }
 
-function clickDrawImageObject() {
-  alert('drawImageObject');
+function clickDrawImageObject(canvas, context) {
+  // make new Image object
 }
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
@@ -150,7 +159,6 @@ function submitAjaxForm(event, form, fn) {
   $.ajax(options);
 
   event.preventDefault();
-
 }
 
 function sendGenericAjaxRequest(url, data, verb, altVerb, event, fn){
