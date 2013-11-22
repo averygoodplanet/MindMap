@@ -10,6 +10,11 @@ block content
       button.small#resetCanvas  resetCanvas
       button.small#redEmptyRectangle redEmptyRectangle
       button.small#verticalLines verticalLines
+      button.small#drawText drawText
+      button.small#drawImageObject drawImageObject
   .row
     .small-12.columns
-      canvas#canvas
+      canvas#canvas(height='600px', width='600px')
+      //- canvas height and width need to be set inline
+      //- and not in CSS/LESS, to avoid blurry text/images
+

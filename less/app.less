@@ -6,9 +6,10 @@ body
 
   canvas
   {
+    // for canvas the height and width needs to be set INLINE
+    // in jade/html, NOT in CSS to prevent blurry text/images
+    // see http://davidjs.com/2011/08/blurry-images-in-html5-canvas/
     background-color: white;
-    width: 600px;
-    height: 600px;
     border: 1px dashed black;
   }
 

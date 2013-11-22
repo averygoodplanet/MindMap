@@ -30,6 +30,8 @@ function initializeEventHandlers(){
   $('#resetCanvas').on('click', clickResetCanvas);
   $('#redEmptyRectangle').on('click', clickRedEmptyRectangle);
   $('#verticalLines').on('click', clickVerticalLines);
+  $('#drawText').on('click', clickDrawText);
+  $('#drawImageObject').on('click', clickDrawImageObject);
 }
 
 ///////////////////   Event Handlers  ///////////////////////////////////
@@ -95,7 +97,7 @@ function clickVerticalLines() {
   // use beginPath() for new path (e.g. a path that is a different color)
   // let's canvas know this is a separate path.
   context.beginPath();
-  for(var x = 0.5; x < 500; x += 10){
+  for(var x = 0.5; x < 600; x += 10){
     //moveTo (0.5, 0), (10.5, 0) ...
     // use 0.5 to keep 1px width
     context.moveTo(x, 0);
@@ -107,6 +109,22 @@ function clickVerticalLines() {
   context.strokeStyle = 'green';
   // 'ink in' the path that was created in 'pencil-trace'
   context.stroke();
+}
+
+function clickDrawText() {
+  var canvas = document.getElementById('canvas');
+  var context = canvas.getContext('2d');
+  context.font = "bold 12px sans-serif";
+  //drawing text normally:
+  context.fillText('Sample TextI', 120, 120);
+  //drawing text to be offset from bottom right-corner
+  context.textAlign = "right";
+  context.textBaseline = "bottom";
+  context.fillText("2nd Sample", 590, 590);
+}
+
+function clickDrawImageObject() {
+  alert('drawImageObject');
 }
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
