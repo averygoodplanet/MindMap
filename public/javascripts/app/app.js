@@ -26,7 +26,7 @@ function socketConnected(data){
 
 function initializeEventHandlers(){
   $('#devEdit').on('click', clickDevEdit);
-  $('#blackFilledRectangle').on('click', clickBlackFilledRectangle);
+  $('#blackFilledRectangle').on('click', getCanvasThenNext(clickBlackFilledRectangle));
   $('#resetCanvas').on('click', clickResetCanvas);
   $('#redEmptyRectangle').on('click', clickRedEmptyRectangle);
 }
@@ -54,17 +54,30 @@ function drawMap(AJAXdata){
 }
 
 ////////////////////////  <canvas> functions //////////////////////////////
-function clickBlackFilledRectangle() {
-  // console.log('in clickBlackFilledRectangle()');
+function getCanvasThenNext(next){
+  // set canvas to variable
+  var canvas = document.getElementById('canvas');
+  // set canvas context to variable
+  // (the context has access to <canvas> methods and properties)
+  var context = canvas.getContext('2d');
+  // pass the canvas and context to the next function (e.g. to draw a circle)
+  next(canvas, context);
+}
+
+function clickBlackFilledRectangle(canvas, context) {
+  // draw a black rectangle using context.fillRect(x, y, w, h)
+  // where x and y are coordinates of left-top corner of rectangle
+  // w is width, h is height
+  alert('in clickBlackFilledRectangle');
+  context.fillRect(0, 0, 100, 100);
+}
+
+function clickResetCanvas(canvas, context) {
 
 }
 
-function clickResetCanvas() {
-  // console.log('in clickResetCanvas()');
-}
+function clickRedEmptyRectangle(canvas, context) {
 
-function clickRedEmptyRectangle() {
-  // console.log('in clickRedEmptyRectangle()');
 }
 
 
