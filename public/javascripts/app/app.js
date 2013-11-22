@@ -26,7 +26,7 @@ function socketConnected(data){
 
 function initializeEventHandlers(){
   $('#devEdit').on('click', clickDevEdit);
-  $('#blackFilledRectangle').on('click', getCanvasThenNext(clickBlackFilledRectangle));
+  $('#blackFilledRectangle').on('click', clickBlackFilledRectangle);
   $('#resetCanvas').on('click', clickResetCanvas);
   $('#redEmptyRectangle').on('click', clickRedEmptyRectangle);
 }
@@ -64,20 +64,28 @@ function getCanvasThenNext(next){
   next(canvas, context);
 }
 
-function clickBlackFilledRectangle(canvas, context) {
+function clickBlackFilledRectangle() {
+  var canvas = document.getElementById('canvas');
+  var context = canvas.getContext('2d');
   // draw a black rectangle using context.fillRect(x, y, w, h)
   // where x and y are coordinates of left-top corner of rectangle
   // w is width, h is height
-  alert('in clickBlackFilledRectangle');
+  context.fillStyle = 'black';
   context.fillRect(0, 0, 100, 100);
 }
 
-function clickResetCanvas(canvas, context) {
-
+function clickResetCanvas() {
+  var canvas = document.getElementById('canvas');
+  // setting the height or width of <canvas> resets it
+  canvas.width = canvas.width;
 }
 
-function clickRedEmptyRectangle(canvas, context) {
-
+function clickRedEmptyRectangle() {
+  var canvas = document.getElementById('canvas');
+  var context = canvas.getContext('2d');
+  // change fillStyle to red
+  context.strokeStyle = 'red';
+  context.strokeRect(0, 0, 100, 100);
 }
 
 
