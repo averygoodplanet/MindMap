@@ -61,7 +61,7 @@ function initializeEventHandlers(){
     getCanvasThenNext(clickDrawImageObject);});
 
   $('#drawCircle').on('click', function(){
-    getCanvasThenNext(clickDrawCircle)});
+    getCanvasThenNext(clickDrawCircle, circle1)});
 }
 
 ///////////////////   Event Handlers  ///////////////////////////////////
@@ -86,14 +86,15 @@ function drawMap(AJAXdata){
 }
 
 ////////////////////////  <canvas> functions //////////////////////////////
-function getCanvasThenNext(next){
+function getCanvasThenNext(next, optionalObject){
+  // regarding optionalObject see http://www.markhansen.co.nz/javascript-optional-parameters/
   // set canvas to variable
   var canvas = document.getElementById('canvas');
   // set canvas context to variable
   // (the context has access to <canvas> methods and properties)
   var context = canvas.getContext('2d');
   // pass the canvas and context to the next function (e.g. to draw a circle)
-  next(canvas, context);
+  next(canvas, context, optionalObject);
 }
 
 function clickBlackFilledRectangle(canvas, context) {
@@ -158,7 +159,7 @@ function clickDrawImageObject(canvas, context) {
   };
 }
 
-function clickDrawCircle(canvas, context){
+function clickDrawCircle(canvas, context, circle){
   context.beginPath();
   //see http://www.w3schools.com/tags/canvas_arc.asp
   //context.arc(x-of-center, y-of-center, radius, startingAngle,endingAngle, counterclockwiseBoolean);
@@ -167,6 +168,7 @@ function clickDrawCircle(canvas, context){
   context.arc(400, 400, 20, 0, 2*Math.PI, false);
   context.strokeStyle = 'black';
   context.stroke();
+  debugger;
 }
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
