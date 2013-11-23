@@ -42,7 +42,7 @@ function initializeEventHandlers(){
   // this calls getCanvasThenNext which assigns canvas and context variables
   // then calls appropriate function (passing canvas and context) to handle the user's action.
   // using the getCanvasThenNext avoids having to assign canvas and context
-  // separately within each of the different canvas functions
+  // separately within each of the different canvas functions (D.R.Y.)
   $('#blackFilledRectangle').on('click', function() {
     getCanvasThenNext(clickBlackFilledRectangle);});
 
