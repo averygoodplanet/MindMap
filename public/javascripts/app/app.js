@@ -49,6 +49,9 @@ function initializeEventHandlers(){
 
   $('#drawImageObject').on('click', function() {
     getCanvasThenNext(clickDrawImageObject);});
+
+  $('#drawCircle').on('click', function(){
+    getCanvasThenNext(clickDrawCircle)});
 }
 
 ///////////////////   Event Handlers  ///////////////////////////////////
@@ -143,6 +146,17 @@ function clickDrawImageObject(canvas, context) {
   head.onload = function(){
     context.drawImage(head, 200, 200, 50, 50);
   };
+}
+
+function clickDrawCircle(canvas, context){
+  context.beginPath();
+  //see http://www.w3schools.com/tags/canvas_arc.asp
+  //context.arc(x-of-center, y-of-center, radius, startingAngle,endingAngle, counterclockwiseBoolean);
+  //starting angle for 3 o'clock position is (0*Math.PI) in radians
+  //ending angle for 3 o'clock position is (2*Math.PI) in radians
+  context.arc(400, 400, 20, 0, 2*Math.PI, false);
+  context.strokeStyle = 'black';
+  context.stroke();
 }
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
