@@ -4,7 +4,17 @@ $(document).ready(initialize);
 
 var socket;
 
+/////////  Dummy Global Objects (for development process)  ////////////////
 var dummyMapObject = {name: 'map#1'};
+
+function Circle(x, y, radius, color) {
+  this.center = {x: x, y: y};
+  this.radius = radius;
+  this.color = color;
+}
+
+var circle1 = new Circle(200, 200, 100, "black");
+///////////////////////////////////////////////////////////////////////////
 
 function initialize(){
   $(document).foundation();
