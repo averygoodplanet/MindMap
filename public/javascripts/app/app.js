@@ -165,10 +165,9 @@ function clickDrawCircle(canvas, context, circle){
   //context.arc(x-of-center, y-of-center, radius, startingAngle,endingAngle, counterclockwiseBoolean);
   //starting angle for 3 o'clock position is (0*Math.PI) in radians
   //ending angle for 3 o'clock position is (2*Math.PI) in radians
-  context.arc(400, 400, 20, 0, 2*Math.PI, false);
-  context.strokeStyle = 'black';
+  context.arc(circle.center.x, circle.center.y, circle.radius, 0, 2*Math.PI, false);
+  context.strokeStyle = circle.color;
   context.stroke();
-  debugger;
 }
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
