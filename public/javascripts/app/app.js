@@ -6,6 +6,7 @@ var socket;
 
 /////////  Dummy Global Objects (for development process)  ////////////////
 var dummyMapObject = {name: 'map#1'};
+var sampleText = 'fourfourfour';
 
 function Circle(x, y, radius, color) {
   this.center = {x: x, y: y};
@@ -13,7 +14,7 @@ function Circle(x, y, radius, color) {
   this.color = color;
 }
 
-var circle1 = new Circle(200, 200, 100, "black");
+var circle1 = new Circle(200, 200, 20, "black");
 ///////////////////////////////////////////////////////////////////////////
 
 function initialize(){
@@ -62,6 +63,9 @@ function initializeEventHandlers(){
 
   $('#drawCircle').on('click', function(){
     getCanvasThenNext(clickDrawCircle, circle1)});
+
+  $('#textCenteredCircle').on('click', function(){
+    getCanvasThenNext(clickTextCenteredCircle, circle1, sampleText)});
 }
 
 ///////////////////   Event Handlers  ///////////////////////////////////
@@ -86,7 +90,7 @@ function drawMap(AJAXdata){
 }
 
 ////////////////////////  <canvas> functions //////////////////////////////
-function getCanvasThenNext(next, optionalObject){
+function getCanvasThenNext(next, optional1, optional2){
   // regarding optionalObject see http://www.markhansen.co.nz/javascript-optional-parameters/
   // set canvas to variable
   var canvas = document.getElementById('canvas');
@@ -94,7 +98,7 @@ function getCanvasThenNext(next, optionalObject){
   // (the context has access to <canvas> methods and properties)
   var context = canvas.getContext('2d');
   // pass the canvas and context to the next function (e.g. to draw a circle)
-  next(canvas, context, optionalObject);
+  next(canvas, context, optional1, optional2);
 }
 
 function clickBlackFilledRectangle(canvas, context) {
@@ -168,6 +172,31 @@ function clickDrawCircle(canvas, context, circle){
   context.arc(circle.center.x, circle.center.y, circle.radius, 0, 2*Math.PI, false);
   context.strokeStyle = circle.color;
   context.stroke();
+}
+
+function clickTextCenteredCircle(canvas, context, circle, text){
+  // see http://jsfiddle.net/2varh/1/
+  // seehttp://stackoverflow.com/questions/10260176/filling-a-canvas-shape-with-text
+  // WHAT THIS FUNCTION DOES:
+  // Takes text and draws it centered within a circle
+  // the font-size is scaled to circle radius.
+  // The middle four characters of text fit within the circle,
+  // even as circle size varies. (If >4 characters, these characters are
+  // to the left and right of circle.)
+
+  // draw the circle
+  clickDrawCircle(canvas, context, circle);
+
+  // set text font-size, and drawing color
+  var font = "bold " + circle.radius +"px serif";
+  context.font = font;
+  context.fillStyle = "black";
+  // measure text width and estimated height (true text height property not available)
+  var textWidth = context.measureText(text).width;
+  var textHeight = context.measureText("w").width; // this is a GUESS of height
+  // DRAW TEXT centered by drawing at location below-center by 1/2 text height
+  // and left-of-center by half the text (estimated) width
+  context.fillText(text, circle.center.x - (textWidth/2) , circle.center.y + (textHeight/2));
 }
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
