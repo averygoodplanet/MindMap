@@ -18,11 +18,17 @@ body
     margin-right: 10px;
   }
 
-  //InfoVis styles
+  //InfoVis styles //////////////////////////
   #center-container
   {
     background-color:#1a1a1a;
     color:#ccc;
+  }
+
+  #infovis-canvaswidget
+  {
+    // makes sure graph (i.e. graph labels) don't show up outside the widget.
+    overflow: hidden;
   }
 
   #infovis
@@ -47,5 +53,33 @@ body
     color: yellow;
   }
 
+  #inner-details {
+    font-size:12px;
+  }
+
+  span.close {
+    color:#FF5555;
+    cursor:pointer;
+    font-weight:bold;
+    margin-left:3px;
+  }
+
+  span.name {
+    cursor: pointer;
+  }
+
+  /*TOOLTIPS*/
+  .tip {
+     text-align: left;
+     width:auto;
+     max-width:500px;
+  }
+
+  .tip-title {
+    font-size: 11px;
+    text-align:center;
+    margin-bottom:2px;
+  }
+  ///////////////////////////////////////////////
 }
 
