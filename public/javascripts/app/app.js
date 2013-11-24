@@ -15,6 +15,7 @@ function Circle(x, y, radius, color) {
 }
 
 var circle1 = new Circle(200, 200, 20, "black");
+var idNumber = 1000;
 ///////////////////////////////////////////////////////////////////////////
 
 function initialize(){
@@ -70,7 +71,7 @@ function initializeEventHandlers(){
 
   $('#addFreeNode').on('click', clickAddFreeNode);
 
-  $('#addNodeAdjacent').on('click', clickAddNodeAdjacentToSelectedNode);
+  $('#connectNode0To999').on('click', clickConnectNode0To999);
 }
 
 ///////////////////   Event Handlers  ///////////////////////////////////
@@ -95,6 +96,8 @@ function drawMap(AJAXdata){
 }
 
 ////////////////////////  <canvas> functions //////////////////////////////
+// I used these functions to teach myself <canvas> basics based on online tutorials.
+
 function getCanvasThenNext(next, optional1, optional2){
   // regarding optionalObject see http://www.markhansen.co.nz/javascript-optional-parameters/
   // set canvas to variable
@@ -208,21 +211,27 @@ function clickAddFreeNode() {
   // (1) creating a node with this method, you need to generate a unique id for each new node
   // (2) new nodes are created in the same place and overlap each other
   // (3) node isn't connected to the graph (mindmaps have all nodes connected to the graph with at least one edge)
-  var id = Math.random() * (100000 - 10000) + 10000;
-  fd.graph.addNode({ id: id, name: 'your text here', data: {}});
+
+  // create unique id by decrementing global variable idNumber (initialized to 1,000).
+  idNumber -= 1;
+  fd.graph.addNode({ id: "graphnode"+idNumber, name: 'your text here', data: {}});
   //REDRAW/UPDATE the graph
   fd.plot();
 }
 
-function clickAddNodeAdjacentToSelectedNode() {
-  //Identify currently-selected Node
+function clickConnectNode0To999() {
+  // Goal: Create adjacence (connection) from pre-existing graphnode0
+  // to pre-existing graphnode999 (made with AddFreeNode button).
 
-  //Create a newNode variable (similar to object in clickAddFreeNode())
-
-  //Try to add node, linked to selected node, using something like
-  // fd.graph.addAdjacence(rootNode, node, {})
-  // fd.plot();
-  // See if are examples in demo
+  // get nodes by id
+  var fromId = "graphnode0";
+  var toId = "graphnode999";
+  var fromNode = fd.graph.getNode(fromId);
+  var toNode = fd.graph.getNode(toId);
+  // create connection using addAdjacence graph method
+  var adj = fd.graph.addAdjacence(fromNode, toNode);
+  //REDRAW graph
+  fd.plot();
 }
 
 
