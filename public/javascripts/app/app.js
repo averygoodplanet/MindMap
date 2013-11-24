@@ -215,7 +215,14 @@ function clickAddFreeNode() {
 }
 
 function clickAddNodeAdjacentToSelectedNode() {
-  console.log(fd);
+  //Identify currently-selected Node
+
+  //Create a newNode variable (similar to object in clickAddFreeNode())
+
+  //Try to add node, linked to selected node, using something like
+  // fd.graph.addAdjacence(rootNode, node, {})
+  // fd.plot();
+  // See if are examples in demo
 }
 
 
