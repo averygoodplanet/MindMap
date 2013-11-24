@@ -67,6 +67,10 @@ function initializeEventHandlers(){
 
   $('#textCenteredCircle').on('click', function(){
     getCanvasThenNext(clickTextCenteredCircle, circle1, sampleText)});
+
+  $('#addFreeNode').on('click', clickAddFreeNode);
+
+  $('#addNodeAdjacent').on('click', clickAddNodeAdjacentToSelectedNode);
 }
 
 ///////////////////   Event Handlers  ///////////////////////////////////
@@ -197,6 +201,24 @@ function clickTextCenteredCircle(canvas, context, circle, text){
   // and left-of-center by half the text (estimated) width
   context.fillText(text, circle.center.x - (textWidth/2) , circle.center.y + (textHeight/2));
 }
+
+////////////////////  InfoVis Affecting Functions //////////////////////////////////
+function clickAddFreeNode() {
+  //*Issues (tabling for now as this function is just a learning/example function; not a function for the actual program)
+  // (1) creating a node with this method, you need to generate a unique id for each new node
+  // (2) new nodes are created in the same place and overlap each other
+  // (3) node isn't connected to the graph (mindmaps have all nodes connected to the graph with at least one edge)
+  var id = Math.random() * (100000 - 10000) + 10000;
+  fd.graph.addNode({ id: id, name: 'your text here', data: {}});
+  //REDRAW/UPDATE the graph
+  fd.plot();
+}
+
+function clickAddNodeAdjacentToSelectedNode() {
+  console.log(fd);
+}
+
+
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
 function submitAjaxForm(event, form, fn) {

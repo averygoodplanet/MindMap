@@ -2,7 +2,8 @@
 // http://philogb.github.io/jit/static/v20/Jit/Examples/ForceDirected/example2.html
 // http://philogb.github.io/jit/static/v20/Jit/Examples/ForceDirected/example2.code.html
 
-var labelType, useGradients, nativeTextSupport, animate;
+//making fd a global variable so that I can access it in static app.js
+var labelType, useGradients, nativeTextSupport, animate, fd;
 
 // Checking for what browser the user is using, for iPhone/iPad/IE settings.
 (function() {
@@ -504,7 +505,7 @@ function init(){
 
   // end
   // init ForceDirected
-  var fd = new $jit.ForceDirected({
+  fd = new $jit.ForceDirected({
     //id of the visualization container
     injectInto: 'infovis',
     //Enable zooming and panning
@@ -523,13 +524,13 @@ function init(){
     // with dollar prefixed data-properties in the
     // JSON structure.
     Node: {
-      overridable: true,
-      dim: 7
+      overridable: true, // originally true; if false, you can't use e.g. $color in JSON to change node's color
+      dim: 7 // originally 7; size of node point
     },
     Edge: {
       overridable: true,
-      color: '#23A4FF',
-      lineWidth: 0.4
+      color: '#23A4FF', //original '#23A4FF'
+      lineWidth: 0.4 //original 0.4
     },
     // Add node events
     Events: {
@@ -572,7 +573,7 @@ function init(){
       closeButton.innerHTML = 'x';
       domElement.appendChild(nameContainer);
       domElement.appendChild(closeButton);
-      style.fontSize = "0.8em";
+      style.fontSize = "0.8em"; //originally 0.8em--label size
       style.color = "#ddd";
       //Fade the node and its connections when
       //clicking the close button
