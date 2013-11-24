@@ -72,6 +72,8 @@ function initializeEventHandlers(){
   $('#addFreeNode').on('click', clickAddFreeNode);
 
   $('#connectNode0To999').on('click', clickConnectNode0To999);
+
+  $('#createAndConnectNewNodeTo0').on('click', clickCreateAndConnectNewNodeTo0);
 }
 
 ///////////////////   Event Handlers  ///////////////////////////////////
@@ -229,11 +231,27 @@ function clickConnectNode0To999() {
   var fromNode = fd.graph.getNode(fromId);
   var toNode = fd.graph.getNode(toId);
   // create connection using addAdjacence graph method
-  var adj = fd.graph.addAdjacence(fromNode, toNode);
-  //REDRAW graph
+  var adjacence = fd.graph.addAdjacence(fromNode, toNode);
+  // REDRAW graph
   fd.plot();
 }
 
+function clickCreateAndConnectNewNodeTo0() {
+  // add new node (with new id) to graph
+  idNumber -= 1;
+  var newNodeId = "graphnode" + idNumber;
+  fd.graph.addNode({ id: newNodeId, name: 'your text here', data: {}});
+
+  // get nodes by id
+  var fromId = "graphnode0"; // in improved function, on node dblclick I'll pass fromId into function
+  var toId = newNodeId;
+  var fromNode = fd.graph.getNode(fromId);
+  var toNode = fd.graph.getNode(toId);
+  // create connection using addAdjacence graph method
+  var adjacence = fd.graph.addAdjacence(fromNode, toNode);
+  // REDRAW graph
+  fd.plot();
+}
 
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
