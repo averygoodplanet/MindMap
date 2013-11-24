@@ -21,6 +21,7 @@ function initialize(){
   $(document).foundation();
   initializeSocketIO();
   initializeEventHandlers();
+  init(); //should call jit.js
 }
 
 function initializeSocketIO(){
@@ -93,7 +94,7 @@ function drawMap(AJAXdata){
 function getCanvasThenNext(next, optional1, optional2){
   // regarding optionalObject see http://www.markhansen.co.nz/javascript-optional-parameters/
   // set canvas to variable
-  var canvas = document.getElementById('canvas');
+  var canvas = document.getElementById('canvas1');
   // set canvas context to variable
   // (the context has access to <canvas> methods and properties)
   var context = canvas.getContext('2d');
@@ -102,8 +103,6 @@ function getCanvasThenNext(next, optional1, optional2){
 }
 
 function clickBlackFilledRectangle(canvas, context) {
-  var canvas = document.getElementById('canvas');
-  var context = canvas.getContext('2d');
   // draw a black rectangle using context.fillRect(x, y, w, h)
   // where x and y are coordinates of left-top corner of rectangle
   // w is width, h is height
