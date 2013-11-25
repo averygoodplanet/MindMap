@@ -544,7 +544,11 @@ function init(){
         fd.canvas.getElement().style.cursor = '';
       },
       //Right-click calls function to add new node
-      onRightClick: function(node, eventInfo, e){rightClickAddNode(node, eventInfo, e);},
+      onRightClick: function(node, eventInfo, e){
+        if(e.which === 3 && node){
+          rightClickAddNode(node, eventInfo, e);
+        }
+      },
       //Update node positions when dragged
       onDragMove: function(node, eventInfo, e) {
         var pos = eventInfo.getPos();
@@ -594,7 +598,10 @@ function init(){
       //its name. This is done by animating some
       //node styles like its dimension and the color
       //and lineWidth of its adjacencies.
-      nameContainer.onclick = function() {
+      nameContainer.onclick = function(event) {
+        ////////////////
+        console.log(event);
+        console.log(event.which);
         //set final styles
         fd.graph.eachNode(function(n) {
           if(n.id != node.id) delete n.selected;

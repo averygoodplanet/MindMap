@@ -310,7 +310,6 @@ function rightClickAddNode(node, eventInfo, e){
 
   // get nodes by id
   var fromId = node.id;
-  debugger;
   var toId = newNodeId;
   var fromNode = fd.graph.getNode(fromId);
   var toNode = fd.graph.getNode(toId);
@@ -338,6 +337,10 @@ function rightClickAddNode(node, eventInfo, e){
       fd.animate();
     }
   });
+}
+
+function clickLabel(event) {
+  alert('clickLabel()');
 }
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
