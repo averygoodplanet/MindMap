@@ -594,8 +594,12 @@ function init(){
                   'edge-property:alpha'],
           duration: 500
         });
+        //remove node from fd.graph
         fd.graph.removeNode(node.id);
+        //remove node from browswer global json variable
         json = fd.toJSON("graph");
+        //remove nodes label, close 'x', and div from the DOM
+        $(this).parent().remove();
       };
       //Toggle a node selection when clicking
       //its name. This is done by animating some

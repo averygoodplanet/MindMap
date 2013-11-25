@@ -337,6 +337,8 @@ function rightClickAddNode(node, eventInfo, e){
       fd.animate();
     }
   });
+  // update json (fd.graph current state --> json)
+  json = fd.toJSON("graph");
 }
 
 function changeText(event, oldThis){
