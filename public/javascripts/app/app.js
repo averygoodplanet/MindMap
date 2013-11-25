@@ -340,12 +340,18 @@ function rightClickAddNode(node, eventInfo, e){
 }
 
 function changeText(event, oldThis){
-  // get text from <textarea>, clear <textarea>, change node's label to the new text
+  // get text from <textarea>, clear <textarea>, change node's label <span> in DOM to the new text
   var newText = $('#nodeTextBox').val();
   $('#nodeTextBox').val('');
   $(oldThis).text(newText);
-  // Probably will just modify text within displayed graph, then on Save-button use loader.js to
-  // do a toJSON (graph--> JSON) and save to database; then on Load-button use loadJSON and then init() function;
+
+  // change the actual node object's text within fd.graph
+  var thisNodeId = event.target.parentNode.attributes[0].nodeValue;
+  var thisNode = fd.graph.getNode(thisNodeId);
+  thisNode.name = newText;
+  // update json (fd.graph current state --> json)
+  json = fd.toJSON("graph");
+  console.log(json);
 }
 
 ///////////////////    AJAX     //////////////////////////////////////////////////

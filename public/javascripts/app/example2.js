@@ -3,7 +3,7 @@
 // http://philogb.github.io/jit/static/v20/Jit/Examples/ForceDirected/example2.code.html
 
 //making fd a global variable so that I can access it in static app.js
-var labelType, useGradients, nativeTextSupport, animate, fd;
+var labelType, useGradients, nativeTextSupport, animate, fd, json;
 
 // Checking for what browser the user is using, for iPhone/iPad/IE settings.
 (function() {
@@ -484,7 +484,8 @@ function init(){
   // ];
 
   //Alternate json object--example where I made 2 nodes (one node is automatically provided).
-  var json = [
+  //made json a global variable so that I can access it (e.g. console.log(json)) in other functions.
+  json = [
   {
     //node0
     "adjacencies": [
@@ -593,6 +594,8 @@ function init(){
                   'edge-property:alpha'],
           duration: 500
         });
+        fd.graph.removeNode(node.id);
+        json = fd.toJSON("graph");
       };
       //Toggle a node selection when clicking
       //its name. This is done by animating some
