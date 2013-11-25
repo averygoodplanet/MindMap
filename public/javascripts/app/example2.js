@@ -599,9 +599,6 @@ function init(){
       //node styles like its dimension and the color
       //and lineWidth of its adjacencies.
       nameContainer.onclick = function(event) {
-        ////////////////
-        console.log(event);
-        console.log(event.which);
         //set final styles
         fd.graph.eachNode(function(n) {
           if(n.id != node.id) delete n.selected;
@@ -640,6 +637,10 @@ function init(){
         });
         //append connections information
         $jit.id('inner-details').innerHTML = html + list.join("</li><li>") + "</li></ul>";
+      };
+      nameContainer.ondblclick = function(event){
+        console.log('double-clicked a nameContainer');
+        changeText(event, this);
       };
     },
     // Change node styles when DOM labels are placed

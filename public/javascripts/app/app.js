@@ -339,8 +339,15 @@ function rightClickAddNode(node, eventInfo, e){
   });
 }
 
-function clickLabel(event) {
-  alert('clickLabel()');
+function changeText(event, oldThis){
+  console.log('////////In changeText()');
+  console.log(event);
+  console.log(event.which);
+  console.log(oldThis);
+  $(oldThis).text('new text (hard-coded)');
+  /////// Probably will just modify text within displayed graph, then on Save use loader.js to
+  // do a toJSON (graph--> JSON) and save to database; then on load use loadJSON and then init() function;
+  console.log(json);
 }
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
