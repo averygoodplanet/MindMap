@@ -521,7 +521,7 @@ function init(){
     // Change node and edge styles such as
     // color and width.
     // These properties are also set per node
-    // with dollar prefixed data-properties in the
+    // with dollar-sign prefixed data-properties in the
     // JSON structure.
     Node: {
       overridable: true, // originally true; if false, you can't use e.g. $color in JSON to change node's color

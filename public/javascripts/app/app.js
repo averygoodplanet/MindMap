@@ -74,6 +74,8 @@ function initializeEventHandlers(){
   $('#connectNode0To999').on('click', clickConnectNode0To999);
 
   $('#createAndConnectNewNodeTo0').on('click', clickCreateAndConnectNewNodeTo0);
+
+  $('#connectNewNodeToSelected').on('click', clickConnectNewNodeToSelected);
 }
 
 ///////////////////   Event Handlers  ///////////////////////////////////
@@ -253,6 +255,30 @@ function clickCreateAndConnectNewNodeTo0() {
   fd.plot();
 }
 
+function clickConnectNewNodeToSelected(selectedId){
+  // iterate through all nodes to find which (if any) node is selected
+  var selectedNodeId = null;
+  fd.graph.eachNode(function(node) {
+    if(node.selected){
+      selectedNodeId = node.id;
+      // create a new node and connect it to the selected node:
+      // add new node (with new id) to graph
+      idNumber -= 1;
+      var newNodeId = "graphnode" + idNumber;
+      fd.graph.addNode({ id: newNodeId, name: 'your text here', data: {}});
+
+      // get nodes by id
+      var fromId = selectedNodeId;
+      var toId = newNodeId;
+      var fromNode = fd.graph.getNode(fromId);
+      var toNode = fd.graph.getNode(toId);
+      // create connection using addAdjacence graph method
+      var adjacence = fd.graph.addAdjacence(fromNode, toNode);
+      // REDRAW graph
+      fd.plot();
+    }
+  });
+}
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
 function submitAjaxForm(event, form, fn) {
