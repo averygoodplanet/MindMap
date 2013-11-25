@@ -543,6 +543,8 @@ function init(){
       onMouseLeave: function() {
         fd.canvas.getElement().style.cursor = '';
       },
+      //Right-click calls function to add new node
+      onRightClick: function(node, eventInfo, e){rightClickAddNode(node, eventInfo, e);},
       //Update node positions when dragged
       onDragMove: function(node, eventInfo, e) {
         var pos = eventInfo.getPos();
