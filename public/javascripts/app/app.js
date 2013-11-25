@@ -272,10 +272,30 @@ function clickConnectNewNodeToSelected(selectedId){
       var toId = newNodeId;
       var fromNode = fd.graph.getNode(fromId);
       var toNode = fd.graph.getNode(toId);
+      // make new Node's initial (before animation) starting position
+      // be directly below the fromNode
+      toNode.pos.x = fromNode.pos.x;
+      toNode.pos.y = fromNode.pos.y + 100;
+
       // create connection using addAdjacence graph method
       var adjacence = fd.graph.addAdjacence(fromNode, toNode);
-      // REDRAW graph
-      fd.plot();
+      // Fancy REDRAW of graph
+      // This redraw method is taken from docs at http://philogb.github.io/jit/static/v20/Docs/files/Visualizations/ForceDirected-js.html
+      // When I previously used just fd.plot(), new nodes were being placed on top of one another and edges weren't
+      // repositioned aesthetically. This new method calculates new force directed conformation and then
+      // animates the graph to the new conformation.
+      fd.computeIncremental({
+        iter: 20,
+        property: 'end',
+        onStep: function(perc) {
+          Log.write("loading " + perc + "%");
+        },
+        onComplete: function() {
+          Log.write("done");
+          //////////fd.plot();
+          fd.animate();
+        }
+      });
     }
   });
 }
