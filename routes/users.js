@@ -3,15 +3,22 @@ var bcrypt = require('bcrypt');
 var User = mongoose.model('User');
 
 exports.create = function(req, res){
+  // create new mongoose User model
+  // and set the user email from the email in the request
   var user = new User();
   user.email = req.body.email;
 
+  // convert password --> to hash
+  //bcrypt.hash(provided-password, salt, callback)
   bcrypt.hash(req.body.password, 10, function(err, hash){
+    //save the hash (not the password) in user.password
     user.password = hash;
+    //save the user to mongoose
     user.save(function(err, user){
       if(err){
         res.send({status: 'error'});
       } else {
+        // if saved successfully, send back status: 'ok';
         res.send({status: 'ok'});
       }
     });

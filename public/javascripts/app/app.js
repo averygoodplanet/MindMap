@@ -91,8 +91,10 @@ function initializeEventHandlers(){
 function clickRegister(e){
   var url = '/users';
   var data = $('form#authentication').serialize();
-  debugger;
   sendAjaxRequest(url, data, 'post', null, e, function(data){
+    console.log('callback from users.create');
+    console.log(data);
+    console.log('*****************');
     htmlRegisterComplete(data);
   });
 }
@@ -129,24 +131,36 @@ function clickChangeAdmin(){
 }
 
 function htmlRegisterComplete(result){
+  //clear text from email and password input fields
   $('input[name="email"]').val('');
   $('input[name="password"]').val('');
 
+  // if result.status (passed back from server in
+  // in clickRegister() and users.create()),
+  // then show hide login form.
   if(result.status === 'ok'){
     $('form#authentication').toggleClass('hidden');
   }
 }
 
 function htmlUpdateLoginStatus(result){
+  console.log()
+  //clear text from the input boxes
   $('input[name="email"]').val('');
   $('input[name="password"]').val('');
 
+  // if result.status (which server passed back on clickRegister
+  // in users.create) is 'ok', then:
+  // - hide login form
+  // - change text, data-email, style red the #authentication-button
+  // in nav.jade  if (user) #authentication-button shows user.email
+  // does a GET '/' request with window.location.href
   if(result.status === 'ok'){
     $('form#authentication').toggleClass('hidden');
     $('#authentication-button').attr('data-email', result.email);
     $('#authentication-button').text(result.email);
     $('#authentication-button').addClass('alert');
-    $('#the-application').removeClass('hidden');
+    //$('#the-application').removeClass('hidden');
     window.location.href = '/';
   }
 }
