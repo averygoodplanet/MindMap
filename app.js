@@ -22,6 +22,12 @@ require('./config').initialize(app, RedisStore);
 // routes
 app.get('/', home.index);
 app.get('/map', map.show);
+app.get('/new', map.new);
+app.get('/save', map.save);
+app.get('/create', map.create);
+app.get('/table', map.table);
+app.get('/instructions', map.instructions);
+app.get('/about', map.about);
 app.post('/users', users.create);
 app.put('/login', users.login);
 app.delete('/logout', users.logout);
