@@ -38,6 +38,12 @@ function socketConnected(data){
 }
 
 function initializeEventHandlers(){
+  //User LOGIN-Register-Logout handlers
+  $('#authentication-button').on('click', clickAuthenticationButton);
+  $('#register').on('click', clickRegister);
+  $('#login').on('click', clickLogin);
+  $('#users input[type="checkbox"]').on('click', clickChangeAdmin);
+
   $('#devEdit').on('click', clickDevEdit);
 
   // example of passing a function to a function
@@ -80,7 +86,79 @@ function initializeEventHandlers(){
   //event handler rightClickAddNode is registered in Events property in example2.js
 }
 
-///////////////////   Event Handlers  ///////////////////////////////////
+///////////////////   Login-Register-Logout Handlers  ///////////////////////////////////
+
+function clickRegister(e){
+  var url = '/users';
+  var data = $('form#authentication').serialize();
+  debugger;
+  sendAjaxRequest(url, data, 'post', null, e, function(data){
+    htmlRegisterComplete(data);
+  });
+}
+
+function clickLogin(e){
+  var url = '/login';
+  var data = $('form#authentication').serialize();
+  sendAjaxRequest(url, data, 'post', 'put', e, function(data){
+    htmlUpdateLoginStatus(data);
+  });
+}
+
+function clickAuthenticationButton(e){
+  var isAnonymous = $('#authentication-button[data-email="anonymous"]').length === 1;
+
+  if(isAnonymous){
+    $('form#authentication').toggleClass('hidden');
+    $('input[name="email"]').focus();
+  } else {
+    var url = '/logout';
+    sendAjaxRequest(url, {}, 'post', 'delete', null, function(data){
+      htmlLogout(data);
+    });
+  }
+
+  e.preventDefault();
+}
+
+function clickChangeAdmin(){
+  var url = $(this).parent().next().find('form').attr('action');
+  sendAjaxRequest(url, {}, 'post', 'put', null, function(data){
+    console.log(data);
+  });
+}
+
+function htmlRegisterComplete(result){
+  $('input[name="email"]').val('');
+  $('input[name="password"]').val('');
+
+  if(result.status === 'ok'){
+    $('form#authentication').toggleClass('hidden');
+  }
+}
+
+function htmlUpdateLoginStatus(result){
+  $('input[name="email"]').val('');
+  $('input[name="password"]').val('');
+
+  if(result.status === 'ok'){
+    $('form#authentication').toggleClass('hidden');
+    $('#authentication-button').attr('data-email', result.email);
+    $('#authentication-button').text(result.email);
+    $('#authentication-button').addClass('alert');
+    $('#the-application').removeClass('hidden');
+    window.location.href = '/';
+  }
+}
+
+function htmlLogout(data){
+  $('#authentication-button').attr('data-email', 'anonymous');
+  $('#authentication-button').text('Login | Sign Up');
+  $('#authentication-button').removeClass('alert');
+  $('#the-application').addClass('hidden');
+  window.location.href = '/';
+}
+
 function clickDevEdit(e){
   //OPTION 1 (without AJAX, do window.location.href = '/map')
   window.location.href = '/map';

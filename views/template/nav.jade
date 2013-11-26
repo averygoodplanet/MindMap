@@ -1,0 +1,17 @@
+.contain-to-grid.fixed
+  nav.top-bar
+    ul.title-area
+      li.name
+        h1: a(href="/") MindMap
+      li.toggle-topbar.menu-icon
+        a(href="#")
+          span Menu
+
+    section.top-bar-section
+      ul.left
+      ul.right
+        li.divider
+        if user
+          li.has-form: a#authentication-button.button.radius.alert(href="#", data-email=user.email)= user.email
+        else
+          li.has-form: a#authentication-button.button.radius(href="#", data-email="anonymous") Login | Sign Up
