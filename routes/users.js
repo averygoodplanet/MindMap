@@ -27,9 +27,17 @@ exports.create = function(req, res){
 
 exports.login = function(req, res){
   User.findOne({email: req.body.email}, function(err, user){
+    console.log(user);
     if(user){
+      console.log('inside if(user)');
       bcrypt.compare(req.body.password, user.password, function(err, result){
+        console.log('result: ');
+        console.log(result); //false
+        console.log('err: ');
+        console.log(err); //undefined
         if(result){
+          ///////////////////////////
+          console.log('inside if(result)');
           req.session.regenerate(function(err){
             req.session.userId = user.id;
             req.session.save(function(err){
@@ -37,12 +45,14 @@ exports.login = function(req, res){
             });
           });
         } else {
+          console.log('inside else under if(result)');
           req.session.destroy(function(err){
             res.send({status: 'error'});
           });
         }
       });
     } else {
+      console.log('inside else aka user is falsy');
       res.send({status: 'error'});
     }
   });

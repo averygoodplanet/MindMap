@@ -101,8 +101,14 @@ function clickRegister(e){
 
 function clickLogin(e){
   var url = '/login';
+  // serialize takes email and password fields in form
+  // and converts them to a string of parameters
+  // e.g. data = "email=bob%40gmail.com&password=abc"
   var data = $('form#authentication').serialize();
+  // uses altVerb to do a PUT to '/login'
+  // which routes to users.login
   sendAjaxRequest(url, data, 'post', 'put', e, function(data){
+    //e.g. data returns as {status: "ok", email: "charles@gmail.com"}
     htmlUpdateLoginStatus(data);
   });
 }
@@ -156,11 +162,18 @@ function htmlUpdateLoginStatus(result){
   // in nav.jade  if (user) #authentication-button shows user.email
   // does a GET '/' request with window.location.href
   if(result.status === 'ok'){
+    // e.g. result is {status: "ok", email: "charles@gmail.com"}
+    // result.status = 'ok'
     $('form#authentication').toggleClass('hidden');
     $('#authentication-button').attr('data-email', result.email);
     $('#authentication-button').text(result.email);
+    /////////////////////////////////////////////
+    // here is where the login button changes red
     $('#authentication-button').addClass('alert');
+    // #the-application is example of optional field could
+    // display after someone is logged in
     //$('#the-application').removeClass('hidden');
+    // Does a
     window.location.href = '/';
   }
 }
