@@ -34,12 +34,15 @@ exports.initialize = function(app, RedisStore){
           console.log(user);
           console.log('and res.locals.user');
           console.log(res.locals.user);
+          // next() is important because it lets the next
+          // function in middleware process run.
+          next();
         }
       });
     } else {
       console.log('****in app.use, did not find user by id');
+      next();
     }
-    next();
   });
   ///////////////////////////
 
