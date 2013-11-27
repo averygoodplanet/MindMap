@@ -485,24 +485,24 @@ function init(){
 
   //Alternate json object--example where I made 2 nodes (one node is automatically provided).
   //made json a global variable so that I can access it (e.g. console.log(json)) in other functions.
-  json = [
-  {
-    //node0
-    "adjacencies": [
-      {
-        "nodeTo": "",
-        "nodeFrom": "",
-        "data": {}
-      }
-    ],
-    "data":
-      {
-        "$color": "#0000FF",
-        "$type": "star"
-      },
-    "id": "graphnode0",
-    "name": "graphnode0 has text here"
-  }];
+  // json = [
+  // {
+  //   //node0
+  //   "adjacencies": [
+  //     {
+  //       "nodeTo": "",
+  //       "nodeFrom": "",
+  //       "data": {}
+  //     }
+  //   ],
+  //   "data":
+  //     {
+  //       "$color": "#0000FF",
+  //       "$type": "star"
+  //     },
+  //   "id": "graphnode0",
+  //   "name": "graphnode0 has text here"
+  // }];
 
   // end
   // init ForceDirected

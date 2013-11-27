@@ -7,6 +7,10 @@ block content
       a.button.small(href="/save") Save (return to table)
   .row
     .small-12.columns
+      if(map)
+        h2= map
+  .row
+    .small-12.columns
       button.small#blackFilledRectangle blackFilledRectangle
       button.small#resetCanvas  resetCanvas
       button.small#redEmptyRectangle redEmptyRectangle
