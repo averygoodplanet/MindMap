@@ -1,0 +1,10 @@
+form#map-form(action='/create', method='post')
+  fieldset
+    legend New MindMap
+    .row
+      mixin field(12, 'text', 'title', 'Title')
+    .row
+      .small-6.columns
+        button#new-map.radius.small.expand.success Create
+      .small-6.columns
+        a.button.radius.small.expand.alert(href="/table") Cancel
