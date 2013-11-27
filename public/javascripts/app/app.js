@@ -172,8 +172,8 @@ function htmlUpdateLoginStatus(result){
     // #the-application is example of optional field could
     // display after someone is logged in
     //$('#the-application').removeClass('hidden');
-    // Does a GET to '/'
-    window.location.href = '/';
+    // Does a GET to '/table'--on login takes them to the table page.
+    window.location.href = '/table';
   }
 }
 

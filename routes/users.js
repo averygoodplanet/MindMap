@@ -27,36 +27,23 @@ exports.create = function(req, res){
 
 exports.login = function(req, res){
   User.findOne({email: req.body.email}, function(err, user){
-    console.log(user);
     if(user){
-      console.log('inside if(user)');
       bcrypt.compare(req.body.password, user.password, function(err, result){
-        console.log('result: ');
-        console.log(result); //false
-        console.log('err: ');
-        console.log(err); //undefined
         if(result){
-          console.log('inside if(result)');
           req.session.regenerate(function(err){
             //saves userId to session in redis
             req.session.userId = user.id;
             req.session.save(function(err){
-              console.log('*******in exports.login, req.session userId');
-              console.log(req.session.userId);
-              console.log('*******err in exports.login');
-              console.log(err);
               res.send({status: 'ok', email: user.email});
             });
           });
         } else {
-          console.log('inside else under if(result)');
           req.session.destroy(function(err){
             res.send({status: 'error'});
           });
         }
       });
     } else {
-      console.log('inside else aka user is falsy');
       res.send({status: 'error'});
     }
   });
