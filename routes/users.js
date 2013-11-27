@@ -36,11 +36,15 @@ exports.login = function(req, res){
         console.log('err: ');
         console.log(err); //undefined
         if(result){
-          ///////////////////////////
           console.log('inside if(result)');
           req.session.regenerate(function(err){
+            //saves userId to session in redis
             req.session.userId = user.id;
             req.session.save(function(err){
+              console.log('*******in exports.login, req.session userId');
+              console.log(req.session.userId);
+              console.log('*******err in exports.login');
+              console.log(err);
               res.send({status: 'ok', email: user.email});
             });
           });

@@ -17,7 +17,6 @@ function Circle(x, y, radius, color) {
 var circle1 = new Circle(200, 200, 20, "black");
 var idNumber = 1000;
 ///////////////////////////////////////////////////////////////////////////
-
 function initialize(){
   $(document).foundation();
   initializeSocketIO();
@@ -173,7 +172,7 @@ function htmlUpdateLoginStatus(result){
     // #the-application is example of optional field could
     // display after someone is logged in
     //$('#the-application').removeClass('hidden');
-    // Does a
+    // Does a GET to '/'
     window.location.href = '/';
   }
 }
