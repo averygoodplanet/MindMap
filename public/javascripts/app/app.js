@@ -83,8 +83,6 @@ function initializeEventHandlers(){
   $('#connectNewNodeToSelected').on('click', clickConnectNewNodeToSelected);
 
   //event handler rightClickAddNode is registered in Events property in example2.js
-
-  $('#new-map').on('click', clickCreate);
 }
 
 ///////////////////   Login-Register-Logout Handlers  ///////////////////////////////////
@@ -318,6 +316,11 @@ function clickTextCenteredCircle(canvas, context, circle, text){
 }
 
 ////////////////////  InfoVis Affecting Functions //////////////////////////////////
+function loadMap(map){
+  alert('in loadMap, map:');
+}
+
+
 function clickAddFreeNode() {
   //*Issues (tabling for now as this function is just a learning/example function; not a function for the actual program)
   // (1) creating a node with this method, you need to generate a unique id for each new node
@@ -500,51 +503,4 @@ function sendGenericAjaxRequest(url, data, verb, altVerb, event, fn){
   if(altVerb) options.data._method = altVerb;
   $.ajax(options);
   if(event) event.preventDefault();
-}
-
-/////////////// For Routes ////////////////////////////
-function clickCreate(e) {
-  var url = $('#map-form').attr('action');
-  var data = $('#map-form').serialize();
-  sendGenericAjaxRequest(url, data, 'post', null, e, function(data, status, jqXHR){
-    // show the edit page and load the map and page title
-    loadEditPage(data);
-  });
-}
-
-function loadEditPage(data){
-  console.log('in loadEditPage(data)');
-  console.log('data is:');
-  console.log(data);
-  //do a GET to /edit
-  // WAIT FOR THE CALLBACK
-  // IN THE CALLBACK jQuery to display
-  // map title from data.title
-  // function to load the current map
-  // e.g. set global json variable
-  // and then call init()
-  // THIS NEEDS TO HAPPEN AFTER THE PAGE LOADS...
-
-
-  // window.location.href = '/edit';
-  // json = [
-  // {
-  //   //node0
-  //   "adjacencies": [
-  //     {
-  //       "nodeTo": "",
-  //       "nodeFrom": "",
-  //       "data": {}
-  //     }
-  //   ],
-  //   "data":
-  //     {
-  //       "$color": "#0000FF",
-  //       "$type": "star"
-  //     },
-  //   "id": "graphnode0",
-  //   "name": "graphnode0 has text here"
-  // }];
-  // init();
-  // debugger;
 }

@@ -1,4 +1,8 @@
 extends ../template/layout
+script(type='text/javascript').
+  var map = #{map}
+  alert('hi')
+  window.onload = init()
 
 block content
   .row
@@ -8,7 +12,7 @@ block content
   .row
     .small-12.columns
       if(map)
-        h2= map
+        h2= map.title
   .row
     .small-12.columns
       button.small#blackFilledRectangle blackFilledRectangle

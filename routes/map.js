@@ -32,8 +32,7 @@ exports.create = function(req, res){
     // pass object
     console.log('*******in newMap, map: ');
     console.log(map);
-    res.send(map);
-    // res.render('edit/index', {map: map});
+    res.render('edit/index', {map: map});
   });
 };
 
