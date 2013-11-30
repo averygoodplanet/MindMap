@@ -21,8 +21,21 @@ function initialize(){
   $(document).foundation();
   initializeSocketIO();
   initializeEventHandlers();
+  // console.log(JSON.parse($('#mapdata').text()));
+  checkForEditPage();
   // init(); //should call jit.js
-  alert('!{myVar}');
+  // alert('!{myVar}');
+}
+
+function checkForEditPage(){
+  if(window.location.pathname === '/create'){
+    console.log('in check for Edit Page if statement');
+    var entireMapJSON = JSON.parse($('#mapdata').text());
+    var graphData = entireMapJSON.graphData;
+    console.log(graphData);
+  } else {
+    console.log('went to checkforEditPage else statement.');
+  }
 }
 
 function initializeSocketIO(){
@@ -318,6 +331,7 @@ function clickTextCenteredCircle(canvas, context, circle, text){
 
 ////////////////////  InfoVis Affecting Functions //////////////////////////////////
 function loadMap(map){
+  // init(map); see example2.js;
   alert('in loadMap, map:');
 }
 
