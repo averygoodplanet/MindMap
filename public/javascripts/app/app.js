@@ -33,6 +33,26 @@ function checkForEditPage(){
     var entireMapJSON = JSON.parse($('#mapdata').text());
     var graphData = entireMapJSON.graphData;
     console.log(graphData);
+    /////// DUMMY DATA ////////////
+    json = [
+    {
+      //node0
+      "adjacencies": [
+        {
+          "nodeTo": "",
+          "nodeFrom": "",
+          "data": {}
+        }
+      ],
+      "data":
+        {
+          "$color": "#0000FF",
+          "$type": "star"
+        },
+      "id": "graphnode0",
+      "name": "graphnode0 has text here"
+    }];
+    init(); //init uses global json variable.
   } else {
     console.log('went to checkforEditPage else statement.');
   }
