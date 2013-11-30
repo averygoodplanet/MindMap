@@ -22,6 +22,7 @@ function initialize(){
   initializeSocketIO();
   initializeEventHandlers();
   // init(); //should call jit.js
+  alert('!{myVar}');
 }
 
 function initializeSocketIO(){
