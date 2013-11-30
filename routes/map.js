@@ -13,7 +13,27 @@ exports.new = function(req, res){
 };
 
 exports.save = function(req, res){
-  res.render('table/index');
+  // find the map
+  Map.findOne({_id: req.body.mapId}, function (err, map) {
+    // assign new graphData to map
+    // (model was modified so that graphData is initialized as an empty array)
+    map.graphData = req.body.graphData;
+    console.log('map after try assign graphData: ');
+    console.log(map);
+    // save the map
+    map.save(function (err) {
+        if(err) {
+            console.error('ERROR!');
+        }
+    });
+  });
+  // find all maps by user
+
+  // change page to table page
+  // passing back all maps by user
+  // so their title can be displayed in table
+  // so that their id can be stored in data-id
+  // attribute
 };
 
 //GET '/edit'

@@ -117,6 +117,8 @@ function initializeEventHandlers(){
   $('#connectNewNodeToSelected').on('click', clickConnectNewNodeToSelected);
 
   //event handler rightClickAddNode is registered in Events property in example2.js
+
+  $('#save').on('click', clickSave);
 }
 
 ///////////////////   Login-Register-Logout Handlers  ///////////////////////////////////
@@ -355,6 +357,20 @@ function loadMap(map){
   alert('in loadMap, map:');
 }
 
+function clickSave(e){
+  // convert currently displayed graph to JSON
+  var newGraphDataJSON = fd.toJSON('graph');
+
+  // get current map's id from jade
+  var originalMapJSON = JSON.parse($('#mapdata').text());
+  var mapId = originalMapJSON._id;
+
+  // send new graph JSON and original map ID to
+  // server using a 'put' to '/save' --> map.save
+  sendGenericAjaxRequest('/save', {mapId: mapId, graphData: newGraphDataJSON}, 'post', 'put', e, function(data){
+
+  });
+}
 
 function clickAddFreeNode() {
   //*Issues (tabling for now as this function is just a learning/example function; not a function for the actual program)

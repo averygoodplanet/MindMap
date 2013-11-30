@@ -23,7 +23,7 @@ require('./config').initialize(app, RedisStore);
 app.get('/', home.index);
 app.get('/map', map.show);
 app.get('/new', map.new);
-app.get('/save', map.save);
+app.put('/save', map.save);
 app.post('/create', map.create);
 app.get('/table', map.table);
 app.get('/instructions', map.instructions);
