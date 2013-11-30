@@ -25,15 +25,12 @@ exports.save = function(req, res){
         if(err) {
             console.error('ERROR!');
         }
+        res.end(); // res.end() seems necessary for callback's window.location.href to work
+        // per http://stackoverflow.com/questions/11570301/res-redirect-from-post
+        // to redirect after a POST, you need to change
+        // url in static javascript not server-side.
     });
   });
-  // find all maps by user
-
-  // change page to table page
-  // passing back all maps by user
-  // so their title can be displayed in table
-  // so that their id can be stored in data-id
-  // attribute
 };
 
 //GET '/edit'
@@ -57,6 +54,12 @@ exports.create = function(req, res){
 };
 
 exports.table = function(req, res){
+  // find all maps by user
+
+  // passing back all maps by user
+  // so their title can be displayed in table
+  // so that their id can be stored in data-id
+  // attribute
   res.render('table/index');
 };
 

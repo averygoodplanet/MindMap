@@ -368,7 +368,7 @@ function clickSave(e){
   // send new graph JSON and original map ID to
   // server using a 'put' to '/save' --> map.save
   sendGenericAjaxRequest('/save', {mapId: mapId, graphData: newGraphDataJSON}, 'post', 'put', e, function(data){
-
+    window.location.href = '/table';
   });
 }
 
@@ -464,7 +464,7 @@ function clickConnectNewNodeToSelected(){
 
 function rightClickAddNode(node, eventInfo, e){
   // create new node and add to graph
-  idNumber -= 1;window.location.href
+  idNumber -= 1;
   var newNodeId = "graphnode" + idNumber;
   fd.graph.addNode({ id: newNodeId, name: 'your text here', data: {}});
 
