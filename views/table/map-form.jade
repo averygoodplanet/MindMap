@@ -1,0 +1,13 @@
+table#mapListing
+  thead
+    th Open
+    th Title
+    th Last Modified
+    th Delete
+  tbody
+    each map in maps
+      tr(data-id=map.id)
+        td
+        td= map.title
+        td= map.lastModified
+        td
