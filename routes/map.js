@@ -47,6 +47,23 @@ exports.create = function(req, res){
     // pass map object back to browser (static app.js)
     // then within static app.js you'll do a page change and
     // pass object
+
+    // modify graphData (on brand-new graph only) to have 2 points.
+    map.graphData = [
+    {   "id" : "graphnode0",  "name" : "START",
+      "data" : {  "$type" : "star",
+      "$color" : "#0000FF",
+      "$alpha" : "1",   "$dim" : "7" },
+      "adjacencies" : [   {   "nodeTo" : "graphnode999",
+                              "data" : {  "$alpha" : "1",
+                                          "$lineWidth" : "0.4",
+                                          "$color" : "#23a4ff" } } ]
+    },
+    {   "id" : "graphnode999",
+        "name" : "next",
+        "data" : {  "$alpha" : "1", "$dim" : "7" }
+    }];
+
     console.log('*******in newMap, map: ');
     console.log(map);
     res.render('edit/index', {map: map});
