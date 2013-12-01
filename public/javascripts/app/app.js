@@ -15,7 +15,7 @@ function Circle(x, y, radius, color) {
 }
 
 var circle1 = new Circle(200, 200, 20, "black");
-var idNumber = 1000;
+var idNumber = 1;
 ///////////////////////////////////////////////////////////////////////////
 function initialize(){
   $(document).foundation();
@@ -39,14 +39,6 @@ function checkForEditPage(){
       // modify graphData (on brand-new graph only) to have 2 points.
       json = [
       {
-        // //node0
-        // "adjacencies": [
-        //   {
-        //     "nodeTo": "",
-        //     "nodeFrom": "",
-        //     "data": {}
-        //   }
-        // ],
         "data":
           {
             "$color": "#0000FF",
@@ -57,6 +49,8 @@ function checkForEditPage(){
       }];
     }
     init(); //init uses global json variable.
+    // sets idNumber (used to creat new nodes) to one above highest current node index
+    idNumber = fd.toJSON('graph').length;
   } else {
     console.log('went to checkforEditPage else statement.');
   }
@@ -383,7 +377,7 @@ function clickAddFreeNode() {
   // (3) node isn't connected to the graph (mindmaps have all nodes connected to the graph with at least one edge)
 
   // create unique id by decrementing global variable idNumber (initialized to 1,000).
-  idNumber -= 1;
+  idNumber += 1;
   fd.graph.addNode({ id: "graphnode"+idNumber, name: 'your text here', data: {}});
   //REDRAW/UPDATE the graph
   fd.plot();
@@ -406,7 +400,7 @@ function clickConnectNode0To999() {
 
 function clickCreateAndConnectNewNodeTo0() {
   // add new node (with new id) to graph
-  idNumber -= 1;
+  idNumber += 1;
   var newNodeId = "graphnode" + idNumber;
   fd.graph.addNode({ id: newNodeId, name: 'your text here', data: {}});
 
@@ -429,7 +423,7 @@ function clickConnectNewNodeToSelected(){
       selectedNodeId = node.id;
       // create a new node and connect it to the selected node:
       // add new node (with new id) to graph
-      idNumber -= 1;
+      idNumber += 1;
       var newNodeId = "graphnode" + idNumber;
       fd.graph.addNode({ id: newNodeId, name: 'your text here', data: {}});
 
@@ -468,7 +462,6 @@ function clickConnectNewNodeToSelected(){
 
 function rightClickAddNode(node, eventInfo, e){
   // create new node and add to graph
-  idNumber -= 1;
   var newNodeId = "graphnode" + idNumber;
   fd.graph.addNode({ id: newNodeId, name: 'your text here', data: {}});
 
@@ -503,6 +496,7 @@ function rightClickAddNode(node, eventInfo, e){
   });
   // update json (fd.graph current state --> json)
   json = fd.toJSON("graph");
+  idNumber += 1;
 }
 
 function changeText(event, oldThis){
