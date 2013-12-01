@@ -33,7 +33,29 @@ function checkForEditPage(){
     var entireMapJSON = JSON.parse($('#mapdata').text());
     var graphData = entireMapJSON.graphData;
     console.log(graphData);
-    json = graphData;
+    if(graphData.length > 0){
+      json = graphData;
+    } else {
+      // modify graphData (on brand-new graph only) to have 2 points.
+      json = [
+      {
+        // //node0
+        // "adjacencies": [
+        //   {
+        //     "nodeTo": "",
+        //     "nodeFrom": "",
+        //     "data": {}
+        //   }
+        // ],
+        "data":
+          {
+            "$color": "#0000FF",
+            "$type": "star"
+          },
+        "id": "graphnode0",
+        "name": "first node"
+      }];
+    }
     init(); //init uses global json variable.
   } else {
     console.log('went to checkforEditPage else statement.');

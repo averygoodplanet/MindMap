@@ -48,22 +48,6 @@ exports.create = function(req, res){
     // then within static app.js you'll do a page change and
     // pass object
 
-    // modify graphData (on brand-new graph only) to have 2 points.
-    map.graphData = [
-    {   "id" : "graphnode0",  "name" : "START",
-      "data" : {  "$type" : "star",
-      "$color" : "#0000FF",
-      "$alpha" : "1",   "$dim" : "7" },
-      "adjacencies" : [   {   "nodeTo" : "graphnode999",
-                              "data" : {  "$alpha" : "1",
-                                          "$lineWidth" : "0.4",
-                                          "$color" : "#23a4ff" } } ]
-    },
-    {   "id" : "graphnode999",
-        "name" : "next",
-        "data" : {  "$alpha" : "1", "$dim" : "7" }
-    }];
-
     console.log('*******in newMap, map: ');
     console.log(map);
     res.render('edit/index', {map: map});
@@ -72,6 +56,8 @@ exports.create = function(req, res){
 
 exports.table = function(req, res){
   // find all maps by user
+
+  //*** Map.find() see http://mongoosejs.com/docs/queries.html
 
   // passing back all maps by user
   // so their title can be displayed in table
