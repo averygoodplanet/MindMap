@@ -30,17 +30,17 @@ exports.initialize = function(app, RedisStore){
       User.findById(req.session.userId, function(err, user){
         if(user){//if you've found the user put him in the pipeline so he can be used downstream:
           res.locals.user = user;
-          console.log('****in app.use, found user: ');
-          console.log(user);
-          console.log('and res.locals.user');
-          console.log(res.locals.user);
+          // console.log('****in app.use, found user: ');
+          // console.log(user);
+          // console.log('and res.locals.user');
+          // console.log(res.locals.user);
           // next() is important because it lets the next
           // function in middleware process run.
           next();
         }
       });
     } else {
-      console.log('****in app.use, did not find user by id');
+      // console.log('****in app.use, did not find user by id');
       next();
     }
   });

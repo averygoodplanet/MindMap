@@ -7,3 +7,9 @@ block content
       h1 Table Page
       a.button.small(href="/new") New MindMap
       h5 later Open buttons will go to Edit Page
+  .row
+    .small-12.columns
+      for map in maps
+        p= map.title
+        p= map.lastModified
+        p= map._id
