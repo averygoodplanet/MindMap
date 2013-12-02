@@ -25,7 +25,8 @@ function initialize(){
 }
 
 function checkForEditPage(){
-  if(window.location.pathname === '/create' || (window.location.pathname === '/table' && $('#mapform'))){
+  // if(window.location.pathname === '/create' || (window.location.pathname === '/table') && $('#mapdata') && !($('#infovis-canvaswidget')) )  )
+  if((window.location.pathname === '/create' || window.location.pathname === '/table') && ($('#mapdata').length > 0)){
     console.log('in check for Edit Page if statement');
     var entireMapJSON = JSON.parse($('#mapdata').text());
     var graphData = entireMapJSON.graphData;
@@ -45,11 +46,20 @@ function checkForEditPage(){
         "name": "first node"
       }];
     }
-    init(); //init uses global json variable.
+    if(window.location.pathname === '/create'){
+      init();
+    } else if (window.location.pathname === '/table'){
+      if($('#infovis').children('#infovis-canvaswidget').length < 1){
+        init();
+      }
+    } else {
+      alert('pathname not /create or /table');
+    }
+    //init uses global json variable.
     // sets idNumber (used to creat new nodes) to one above highest current node index
     idNumber = fd.toJSON('graph').length;
   } else {
-    console.log('went to checkforEditPage else statement.');
+    console.log('went to checkforEditPage ELSE statement.');
   }
 }
 
