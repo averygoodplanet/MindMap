@@ -7,7 +7,7 @@ table#mapListing
   tbody
     each map in maps
       tr(data-id=map.id)
-        td
-        td= map.title
-        td= map.lastModified
-        td
+        td: a.button.tiny.load Load
+        td#mapTitle= map.title
+        td#mapLastModified= map.lastModified
+        td: a.button.tiny.delete Delete

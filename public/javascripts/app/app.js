@@ -117,6 +117,10 @@ function initializeEventHandlers(){
   //event handler rightClickAddNode is registered in Events property in example2.js
 
   $('#save').on('click', clickSave);
+
+  $('tbody').on('click', '.load', clickLoad);
+
+  $('tbody').on('click', '.delete', clickDelete);
 }
 
 ///////////////////   Login-Register-Logout Handlers  ///////////////////////////////////
@@ -350,6 +354,16 @@ function clickTextCenteredCircle(canvas, context, circle, text){
 }
 
 ////////////////////  InfoVis Affecting Functions //////////////////////////////////
+
+function clickLoad(e){
+
+}
+
+function clickDelete(e){
+
+}
+
+//for loading map on Edit Page
 function loadMap(map){
   // init(map); see example2.js;
   alert('in loadMap, map:');
