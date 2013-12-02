@@ -522,16 +522,18 @@ function rightClickAddNode(node, eventInfo, e){
 function changeText(event, oldThis){
   // get text from <textarea>, clear <textarea>, change node's label <span> in DOM to the new text
   var newText = $('#nodeTextBox').val();
-  $('#nodeTextBox').val('');
-  $(oldThis).text(newText);
+  if(newText){
+    $('#nodeTextBox').val('');
+    $(oldThis).text(newText);
 
-  // change the actual node object's text within fd.graph
-  var thisNodeId = event.target.parentNode.attributes[0].nodeValue;
-  var thisNode = fd.graph.getNode(thisNodeId);
-  thisNode.name = newText;
-  // update json (fd.graph current state --> json)
-  json = fd.toJSON("graph");
-  console.log(json);
+    // change the actual node object's text within fd.graph
+    var thisNodeId = event.target.parentNode.attributes[0].nodeValue;
+    var thisNode = fd.graph.getNode(thisNodeId);
+    thisNode.name = newText;
+    // update json (fd.graph current state --> json)
+    json = fd.toJSON("graph");
+    console.log(json);
+  }
 }
 
 ///////////////////    AJAX     //////////////////////////////////////////////////
