@@ -356,7 +356,7 @@ function clickTextCenteredCircle(canvas, context, circle, text){
 ////////////////////  InfoVis Affecting Functions //////////////////////////////////
 
 function clickLoad(e){
-
+  var mapId = $(this).parent().parent().data('id');
 }
 
 function clickDelete(e){
