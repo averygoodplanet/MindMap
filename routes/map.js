@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Map = mongoose.model('Map');
 var ObjectId = require('mongoose').Types.ObjectId;
 
+// called by clickLoad's GET '/map'
 exports.show = function(req, res){
   console.log('******in exports.show, req.query: ');
   console.log(req.query);
@@ -11,8 +12,7 @@ exports.show = function(req, res){
   Map.findOne({_id: req.query.mapId}, function (err, map){
     console.log('found map: ');
     console.log(map);
-    // res.render('edit/index', {map: map});
-    res.send(map);
+    res.render('edit/index', {map: map});
   });
 };
 

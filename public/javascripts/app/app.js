@@ -25,7 +25,7 @@ function initialize(){
 }
 
 function checkForEditPage(){
-  if(window.location.pathname === '/create'){
+  if(window.location.pathname === '/create' || (window.location.pathname === '/table' && $('#mapform'))){
     console.log('in check for Edit Page if statement');
     var entireMapJSON = JSON.parse($('#mapdata').text());
     var graphData = entireMapJSON.graphData;
@@ -342,9 +342,22 @@ function clickTextCenteredCircle(canvas, context, circle, text){
 
 function clickLoad(e){
   var mapId = $(this).parent().parent().data('id');
+
   // GET '/map' which routes to map.show
   sendGenericAjaxRequest('/map', {mapId: mapId}, 'get', null, e, function(data){
-    console.log(data);
+    // alert('callback');
+    // console.log('callback in clickLoad, data:');
+    // console.log(data);
+    // alert(data);
+    $('body').html(data);
+    //**** page data is showing
+    //**** #mapdata includes data
+    //**** now try initialize();
+    initialize();
+    //*****make sure checkForEditPage
+    //*****is still working on '/table' URL
+    // window.location.href = '/edit';
+    // checkForEditPage();
   });
 }
 
