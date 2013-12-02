@@ -21,10 +21,7 @@ function initialize(){
   $(document).foundation();
   initializeSocketIO();
   initializeEventHandlers();
-  // console.log(JSON.parse($('#mapdata').text()));
   checkForEditPage();
-  // init(); //should call jit.js
-  // alert('!{myVar}');
 }
 
 function checkForEditPage(){
@@ -75,8 +72,6 @@ function initializeEventHandlers(){
   $('#login').on('click', clickLogin);
   $('#users input[type="checkbox"]').on('click', clickChangeAdmin);
 
-  $('#devEdit').on('click', clickDevEdit);
-
   // example of passing a function to a function
   // this calls getCanvasThenNext which assigns canvas and context variables
   // then calls appropriate function (passing canvas and context) to handle the user's action.
@@ -118,7 +113,7 @@ function initializeEventHandlers(){
 
   $('#save').on('click', clickSave);
 
-  $('tbody').on('click', '.load', clickLoad);
+  $('tbody').on('click', 'a.load', clickLoad);
 
   $('tbody').on('click', '.delete', clickDelete);
 }
@@ -223,16 +218,6 @@ function htmlLogout(data){
   window.location.href = '/';
 }
 
-function clickDevEdit(e){
-  //OPTION 1 (without AJAX, do window.location.href = '/map')
-  window.location.href = '/map';
-  ////////////////////////////////////
-
-  //OPTION 2 (with AJAX; and in callback success function replace the
-  // <body> with the <body> portion html returned from server)
-  //sendGenericAjaxRequest('/map', {}, 'GET', null, e, drawMap);
-  ////////////////////////////////////
-}
 
 ///////////////////////  HTML/CSS Changes //////////////////////////////////
 function drawMap(AJAXdata){
@@ -357,16 +342,14 @@ function clickTextCenteredCircle(canvas, context, circle, text){
 
 function clickLoad(e){
   var mapId = $(this).parent().parent().data('id');
+  // GET '/map' which routes to map.show
+  sendGenericAjaxRequest('/map', {mapId: mapId}, 'get', null, e, function(data){
+    console.log(data);
+  });
 }
 
 function clickDelete(e){
 
-}
-
-//for loading map on Edit Page
-function loadMap(map){
-  // init(map); see example2.js;
-  alert('in loadMap, map:');
 }
 
 function clickSave(e){

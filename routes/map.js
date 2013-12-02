@@ -3,10 +3,17 @@ var Map = mongoose.model('Map');
 var ObjectId = require('mongoose').Types.ObjectId;
 
 exports.show = function(req, res){
-  // console.log(req.params);
-  // console.log(req.body);
-  // console.log(req.query);
-  res.render('edit/index');
+  console.log('******in exports.show, req.query: ');
+  console.log(req.query);
+  console.log('******in exports.show, req.query.mapId: ');
+  console.log(req.query.mapId);
+
+  Map.findOne({_id: req.query.mapId}, function (err, map){
+    console.log('found map: ');
+    console.log(map);
+    // res.render('edit/index', {map: map});
+    res.send(map);
+  });
 };
 
 exports.new = function(req, res){
