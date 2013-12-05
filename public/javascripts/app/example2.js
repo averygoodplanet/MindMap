@@ -606,7 +606,6 @@ function init(){
       //node styles like its dimension and the color
       //and lineWidth of its adjacencies.
       nameContainer.onclick = function(event) {
-        //set final styles
         fd.graph.eachNode(function(n) {
           if(n.id != node.id) delete n.selected;
           n.setData('dim', 7, 'end');
@@ -631,7 +630,7 @@ function init(){
         }
         //trigger animation to final styles
         fd.fx.animate({
-          modes: ['node-property:dim',
+          modes: [  'node-property:dim',
                   'edge-property:lineWidth:color'],
           duration: 500
         });
