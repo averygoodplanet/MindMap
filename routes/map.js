@@ -20,6 +20,23 @@ exports.new = function(req, res){
   res.render('new/index');
 };
 
+//DELETE '/delete'
+exports.delete = function(req, res){
+  //verified that server is receiving mapId from browser
+  console.log('*******in exports.delete, req.body:');
+  console.log(req.body);
+  console.log('*******req.body.mapId:');
+  console.log(req.body.mapId);
+
+  // find the map
+
+  // delete the map
+
+  // reload the page, either with something like:
+  // res.render, res.redirect, or href...?, or $(...).html
+  res.end();
+};
+
 exports.save = function(req, res){
   // find the map
   Map.findOne({_id: req.body.mapId}, function (err, map) {

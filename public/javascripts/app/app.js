@@ -125,7 +125,7 @@ function initializeEventHandlers(){
 
   $('tbody').on('click', 'a.load', clickLoad);
 
-  $('tbody').on('click', '.delete', clickDelete);
+  $('tbody').on('click', 'a.delete', clickDelete);
 }
 
 ///////////////////   Login-Register-Logout Handlers  ///////////////////////////////////
@@ -372,7 +372,12 @@ function clickLoad(e){
 }
 
 function clickDelete(e){
-
+  var mapId = $(this).parent().parent().data('id');
+  // Do a POST with alternate verb DELETE
+  // with mapId to path '/delete', route to map.delete;
+  sendGenericAjaxRequest('/delete', {mapId: mapId}, 'post', 'delete', e, function(data){
+    debugger;
+  });
 }
 
 function clickSave(e){

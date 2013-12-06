@@ -22,6 +22,7 @@ require('./config').initialize(app, RedisStore);
 // routes
 app.get('/', home.index);
 app.get('/map', map.show);
+app.delete('/delete', map.delete);
 app.get('/new', map.new);
 app.put('/save', map.save);
 app.post('/create', map.create);
