@@ -28,13 +28,14 @@ exports.delete = function(req, res){
   console.log('*******req.body.mapId:');
   console.log(req.body.mapId);
 
-  // find the map
-
-  // delete the map
-
-  // reload the page, either with something like:
-  // res.render, res.redirect, or href...?, or $(...).html
-  res.end();
+  // find the map and delete it
+  Map.findByIdAndRemove(req.body.mapId, function(err, map){
+    console.log('*******in exports.delete, map:');
+    console.log(map);
+    // reload the page, either with something like:
+    // res.render, res.redirect, or href...?, or $(...).html
+    // res.end();
+  });
 };
 
 exports.save = function(req, res){
