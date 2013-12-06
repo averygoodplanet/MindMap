@@ -373,12 +373,22 @@ function clickLoad(e){
 
 function clickDelete(e){
   var mapId = $(this).parent().parent().data('id');
-  // Do a POST with alternate verb DELETE
-  // with mapId to path '/delete', route to map.delete;
-  sendGenericAjaxRequest('/delete', {mapId: mapId}, 'post', 'delete', e, function(data){
-    //reload table page
-    window.location.href = '/table';
-  });
+  var mapName = $(this).parent().parent().children('#mapTitle').text();
+
+  // Try to do a confirm box  "Are you sure  you want to delete Map1?
+  var sureDelete = confirm('Are you sure you want to delete the '+ mapName +' mindmap?')
+    if (sureDelete){
+      // console.log('confirmed Yes');
+      // Do a POST with alternate verb DELETE
+      // with mapId to path '/delete', route to map.delete;
+      sendGenericAjaxRequest('/delete', {mapId: mapId}, 'post', 'delete', e, function(data){
+        //reload table page
+        window.location.href = '/table';
+      });
+    }
+    else{
+      // console.log('clicked Cancel');
+    }
 }
 
 function clickSave(e){
