@@ -376,7 +376,8 @@ function clickDelete(e){
   // Do a POST with alternate verb DELETE
   // with mapId to path '/delete', route to map.delete;
   sendGenericAjaxRequest('/delete', {mapId: mapId}, 'post', 'delete', e, function(data){
-    debugger;
+    //reload table page
+    window.location.href = '/table';
   });
 }
 

@@ -34,7 +34,7 @@ exports.delete = function(req, res){
     console.log(map);
     // reload the page, either with something like:
     // res.render, res.redirect, or href...?, or $(...).html
-    // res.end();
+    res.end();
   });
 };
 
