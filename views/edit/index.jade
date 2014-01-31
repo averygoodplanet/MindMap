@@ -4,35 +4,14 @@ block content
   #mapdata.hidden= JSON.stringify(map)
   .row
     .small-12.columns
-      h1 Edit Page
-      button.small#save Save
-  .row
-    .small-12.columns
       if(map)
         h2= map.title
-  .row
     .small-12.columns
-      button.small#blackFilledRectangle blackFilledRectangle
-      button.small#resetCanvas  resetCanvas
-      button.small#redEmptyRectangle redEmptyRectangle
-      button.small#verticalLines verticalLines
-      button.small#drawText drawText
-      button.small#drawImageObject drawImageObject
-      button.small#drawCircle drawCircle
-      button.small#textCenteredCircle textCenteredCircle
-      button.small#addFreeNode  addFreeNode
-      button.small#connectNode0To999  #connectNode0To999
-      button.small#createAndConnectNewNodeTo0 #createAndConnectNewNodeTo0
-      button.small#connectNewNodeToSelected #connectNewNodeToSelected
+      button.small#save Save
   .row
     .small-4.columns
       textarea#nodeTextBox(placeholder="enter new text here, then double-click on node's label")
     .small-8.columns
-  //- .row
-  //-   .small-12.columns
-  //-     canvas#canvas1(height='600px', width='600px' background-color='white')
-      //- canvas height and width need to be set inline
-      //- and not in CSS/LESS, to avoid blurry text/images
   .row
     .small-12.columns
       #container
